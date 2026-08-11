@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ElectraMod Community</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      background: #0b0b0d;
+      color: #eaeaea;
+      font-family: "Inter", sans-serif;
+      margin: 0;
+    }
+
+    header {
+      text-align: center;
+      padding: 40px 20px;
+      background: #111;
+      border-bottom: 2px solid #333;
+    }
+
+    .country-select {
+      margin-top: 20px;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 6px;
+      background: #1a1a1d;
+      color: #eaeaea;
+      border: 2px solid #444;
+    }
+
+    .project-grid {
+      max-width: 1100px;
+      margin: 40px auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 25px;
+      padding: 0 20px;
+    }
+
+    .project {
+      background: #1a1a1d;
+      border-radius: 10px;
+      padding: 15px;
+      border: 2px solid #444;
+      transition: 0.2s;
+    }
+
+    .project:hover {
+      transform: scale(1.03);
+      border-color: #7f7fff;
+    }
+
+    .project img {
+      width: 100%;
+      border-radius: 8px;
+    }
+
+    .project h2 {
+      margin: 10px 0 5px;
+      color: #bfbfff;
+    }
+
+    .project p {
+      font-size: 14px;
+      color: #cfcfcf;
+    }
+
+    .btn-row {
+      margin-top: 10px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn {
+      flex: 1;
+      text-align: center;
+      padding: 10px;
+      background: #2a2a2d;
+      border-radius: 6px;
+      color: #9fc5ff;
+      font-weight: bold;
+      text-decoration: none;
+      transition: 0.2s;
+    }
+
+    .btn:hover {
+      background: #3a3a3d;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>⚡ ElectraMod Community Projects</h1>
+    <p>Explore, remix, and create Electra-powered Scratch mods.</p>
+
+    <!-- 🌍 Country Selector -->
+    <select class="country-select" id="countrySelect">
+      <option value="">🌍 Select Your Country</option>
+      <option value="us">United States</option>
+      <option value="uk">United Kingdom</option>
+      <option value="ca">Canada</option>
+      <option value="au">Australia</option>
+      <option value="jp">Japan</option>
+      <option value="kr">South Korea</option>
+      <option value="fr">France</option>
+      <option value="de">Germany</option>
+      <option value="br">Brazil</option>
+      <option value="in">India</option>
+      <option value="za">South Africa</option>
+    </select>
+  </header>
+
+  <section id="projects" class="project-grid">
+    <!-- Projects load here -->
+  </section>
+
+  <script>
+    // Load projects.json
+    fetch("projects.json")
+      .then(res => res.json())
+      .then(projects => {
+        const container = document.getElementById("projects");
+
+        projects.forEach(p => {
+          const div = document.createElement("div");
+          div.className = "project";
+
+          div.innerHTML = `
+            <img src="${p.thumbnail}" alt="${p.name}">
+            <h2>${p.name}</h2>
+            <p>${p.description}</p>
+
+            <div class="btn-row">
+              <a class="btn" href="${p.url}" target="_blank">View</a>
+              <a class="btn" href="${p.remix}" target="_blank">Remix</a>
+            </div>
+          `;
+
+          container.appendChild(div);
+        });
+      });
+
+    // Country selector event
+    document.getElementById("countrySelect").addEventListener("change", function() {
+      alert("🌍 ElectraMod is now showing content for: " + this.options[this.selectedIndex].text);
+    });
+  </script>
+
+</body>
+</html>
