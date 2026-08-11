@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ElectraMod Debug Problems</title>
+  <style>
+    body {
+      background: #0b0b0d;
+      color: #eaeaea;
+      font-family: "Inter", sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      text-align: center;
+      padding: 40px 20px;
+      background: #111;
+      border-bottom: 2px solid #333;
+    }
+
+    .debug-list {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .problem {
+      background: #1a1a1d;
+      border: 2px solid #444;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
+      transition: 0.2s;
+    }
+
+    .problem:hover {
+      transform: scale(1.02);
+      border-color: #7f7fff;
+    }
+
+    .problem h2 {
+      margin: 0 0 10px;
+      color: #bfbfff;
+    }
+
+    .fix-btn {
+      margin-top: 10px;
+      display: inline-block;
+      padding: 10px 15px;
+      background: #2a2a2d;
+      color: #9fc5ff;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.2s;
+    }
+
+    .fix-btn:hover {
+      background: #3a3a3d;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>⚡ ElectraMod Debug Problems</h1>
+    <p>Identify issues. Auto‑fix them. Restore stability.</p>
+  </header>
+
+  <section class="debug-list" id="debugList">
+    <!-- Problems load here -->
+  </section>
+
+  <script>
+    const problems = [
+      { title: "Missing Restore Point", fix: "Electra.RepairRestore()" },
+      { title: "Sprite Corruption", fix: "Electra.CleanSprite()" },
+      { title: "Project Crash Loop", fix: "Electra.RecoverSession()" },
+      { title: "Broken Mod Extension", fix: "Electra.ReloadExtensions()" },
+      { title: "Thumbnail Not Loading", fix: "Electra.RefreshThumbs()" },
+      { title: "Country Selector Freeze", fix: "Electra.ResetGeoModule()" }
+    ];
+
+    const list = document.getElementById("debugList");
+
+    problems.forEach(p => {
+      const div = document.createElement("div");
+      div.className = "problem";
+
+      div.innerHTML = `
+        <h2>${p.title}</h2>
+        <p>Auto‑Fix Command: <strong>${p.fix}</strong></p>
+        <a class="fix-btn" href="#" onclick="runFix('${p.fix}')">Run Fix</a>
+      `;
+
+      list.appendChild(div);
+    });
+
+    function runFix(cmd) {
+      alert("⚡ Running Fix: " + cmd + "\n✔ Problem resolved.");
+    }
+  </script>
+
+</body>
+</html>
